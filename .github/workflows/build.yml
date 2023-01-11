@@ -1,0 +1,29 @@
+name: Windows
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+
+      - name: Configure
+        run: cmake -S src -B build -G "Visual Studio 16 2019"
+
+      - name: Build
+        run: cmake --build build --config Release --target release
+
+
+    #- name: Run CMake
+    #  run: |
+    #    choco install strawberryperl
+    #    echo "C:\strawberry\c\bin;C:\strawberry\perl\site\bin;C:\strawberry\perl\bin" >> $GITHUB_PATH
+
+    #- name: Install Dependencies
+    #  run: curl -sL https://git.io/cpm | perl - install -g --show-build-log-on-failure
+    #- name: Run Tests
+    #  run: prove -l t
