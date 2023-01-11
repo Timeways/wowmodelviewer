@@ -9,6 +9,9 @@ find_package(Qt5 5.13.2 COMPONENTS Core Network Widgets Xml Gui REQUIRED)
 
 # wxwidgets
 SET(CMAKE_PREFIX_PATH ThirdParty/wxWidgets)
+
+# print out the CMAKE_PREFIX_PATH
+message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
 SET(wxWidgets_USE_UNICODE ON)
 find_package(wxWidgets COMPONENTS net aui xml adv core base REQUIRED)
 
