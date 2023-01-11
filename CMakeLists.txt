@@ -7,17 +7,18 @@ SET(QT_LOCATION C:/Qt/5.13.2/msvc2017)
 SET(CMAKE_PREFIX_PATH ${QT_LOCATION}/lib/cmake)
 find_package(Qt5 5.13.2 COMPONENTS Core Network Widgets Xml Gui REQUIRED)
 
-#wxwidgets
+# wxwidgets
 SET(CMAKE_PREFIX_PATH ThirdParty/wxWidgets)
 SET(wxWidgets_USE_UNICODE ON)
 find_package(wxWidgets COMPONENTS net aui xml adv core base REQUIRED)
+
 # add wx widgets inclusions
 include(${wxWidgets_USE_FILE})
 include_directories(${wxWidgets_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/ThirdParty/include)
 
-
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
@@ -28,7 +29,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER QTAutoMoc)
 
 if(DEFINED BUILDNUMBER)
-  add_definitions(-D_BUILDNUMBER=${BUILDNUMBER})
+	add_definitions(-D_BUILDNUMBER=${BUILDNUMBER})
 endif()
 
 # add external libraries compilation
@@ -49,10 +50,10 @@ set_property(TARGET casc_static PROPERTY FOLDER "ThirdParty libraries")
 add_subdirectory(Source)
 
 add_custom_target(release
-          COMMAND
-          "${CMAKE_COMMAND}" --build . --target clean --config Release
-          COMMAND
-          "${CMAKE_COMMAND}" --build . --target install --config Release
-                  COMMAND
-                  ${CMAKE_SOURCE_DIR}/Installers/NSIS/makensis.exe "${CMAKE_SOURCE_DIR}/Installers/Windows/NSIS/WMVInstallerMUI.nsi"
-          )
+	COMMAND
+	"${CMAKE_COMMAND}" --build . --target clean --config Release
+	COMMAND
+	"${CMAKE_COMMAND}" --build . --target install --config Release
+	COMMAND
+	${CMAKE_SOURCE_DIR}/Installers/NSIS/makensis.exe "${CMAKE_SOURCE_DIR}/Installers/Windows/NSIS/WMVInstallerMUI.nsi"
+)
